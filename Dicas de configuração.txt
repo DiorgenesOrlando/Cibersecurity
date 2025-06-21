@@ -1,0 +1,38 @@
+Para configurar o SD-WAN, é necessario configurar o ip de saida e o gateway de cada interface
+a falta desta configuração pode acarretar na não instalação da rota na tablea de roteamento, ou mante-la inativa
+
+FW-DC1-1 # config  system sdwan
+FW-DC1-1 (members) # show
+config members
+    edit 1
+        set interface "VPN-CLARO"
+        set zone "VPN"
+        set source 192.168.10.10
+        set cost 1
+        set priority 1
+    next
+    edit 2
+        set interface "VPN-VIVO"
+        set zone "VPN"
+        set source 192.168.10.1
+        set cost 1
+        set priority 1
+    next
+    edit 3
+        set interface "CLARO"
+        set zone "INTERNET"
+        set gateway 10.10.10.1
+        set source 10.10.10.2
+        set cost 1
+        set priority 1
+    next
+    edit 4
+        set interface "VIVO"
+        set zone "INTERNET"
+        set gateway 20.20.20.1
+        set source 20.20.20.2
+        set cost 1
+        set priority 1
+    next
+end
+
